@@ -37,59 +37,65 @@ export async function generateMetadata({
   const { slug } = await params;
   const client = cachedClient(300);
   const siteUrl = process.env["NEXT_PUBLIC_SITE_URL"] ?? "";
+  let article: ArticleFullType | null;
 
   try {
     const data = await client.request<ArticleResult>(GET_ARTICLE, { slug });
-    const article = data.article;
-    if (!article) return {};
-
-    const canonicalUrl = `${siteUrl}/articles/${article.slug}`;
-    const ogImage = article.coverImage
-      ? [{ url: article.coverImage, alt: article.title }]
-      : [DEFAULT_OG_IMAGE];
-
-    return {
-      metadataBase: siteUrl ? new URL(siteUrl) : undefined,
-      title: article.title,
-      description: article.excerpt ?? undefined,
-      keywords: article.categories.map((c) => c.name),
-      alternates: {
-        canonical: canonicalUrl,
-      },
-      openGraph: {
-        title: article.title,
-        description: article.excerpt ?? undefined,
-        url: canonicalUrl,
-        siteName: "Pen Times Magazine",
-        images: ogImage,
-        type: "article",
-        publishedTime: article.publishedAt ?? undefined,
-        modifiedTime: article.updatedAt ?? undefined,
-        authors: article.author?.name ? [article.author.name] : undefined,
-      },
-      twitter: {
-        card: "summary_large_image",
-        title: article.title,
-        description: article.excerpt ?? undefined,
-        images: article.coverImage
-          ? [article.coverImage]
-          : [DEFAULT_OG_IMAGE.url],
-      },
-      robots: {
-        index: true,
-        follow: true,
-        googleBot: {
-          index: true,
-          follow: true,
-          "max-image-preview": "large",
-          "max-snippet": -1,
-          "max-video-preview": -1,
-        },
-      },
-    };
+    article = data.article;
   } catch {
+    // Metadata lookups should not mask transient API failures. The page render
+    // below will surface those failures through the route's error boundary.
     return {};
   }
+
+  // Metadata is resolved before Next.js starts streaming the page response.
+  // Resolve known misses here so the HTTP response can carry a 404 status.
+  if (!article) notFound();
+
+  const canonicalUrl = `${siteUrl}/articles/${article.slug}`;
+  const ogImage = article.coverImage
+    ? [{ url: article.coverImage, alt: article.title }]
+    : [DEFAULT_OG_IMAGE];
+
+  return {
+    metadataBase: siteUrl ? new URL(siteUrl) : undefined,
+    title: article.title,
+    description: article.excerpt ?? undefined,
+    keywords: article.categories.map((c) => c.name),
+    alternates: {
+      canonical: canonicalUrl,
+    },
+    openGraph: {
+      title: article.title,
+      description: article.excerpt ?? undefined,
+      url: canonicalUrl,
+      siteName: "Pen Times Magazine",
+      images: ogImage,
+      type: "article",
+      publishedTime: article.publishedAt ?? undefined,
+      modifiedTime: article.updatedAt ?? undefined,
+      authors: article.author?.name ? [article.author.name] : undefined,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: article.title,
+      description: article.excerpt ?? undefined,
+      images: article.coverImage
+        ? [article.coverImage]
+        : [DEFAULT_OG_IMAGE.url],
+    },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+        "max-video-preview": -1,
+      },
+    },
+  };
 }
 
 export default async function ArticlePage({
@@ -107,12 +113,8 @@ export default async function ArticlePage({
     article = data.article;
   } catch {
     const client = cachedClient(300);
-    try {
-      const data = await client.request<ArticleResult>(GET_ARTICLE, { slug });
-      article = data.article;
-    } catch {
-      notFound();
-    }
+    const data = await client.request<ArticleResult>(GET_ARTICLE, { slug });
+    article = data.article;
   }
 
   if (!article) notFound();
