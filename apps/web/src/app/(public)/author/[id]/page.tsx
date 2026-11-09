@@ -17,7 +17,7 @@ interface AuthorSummary {
   id: string;
   name: string;
   avatar: string | null;
-  bio: string | null;
+  bio?: string | null;
 }
 
 async function getAuthorArticles(

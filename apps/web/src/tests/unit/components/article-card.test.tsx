@@ -15,6 +15,7 @@ const mockArticle: ArticleCardType = {
   readingTime: 3,
   publishedAt: "2024-06-01T10:00:00.000Z",
   createdAt: "2024-06-01T10:00:00.000Z",
+  updatedAt: "2024-06-01T10:00:00.000Z",
   author: { id: "auth-1", name: "Musa Dankaba", avatar: null },
   categories: [{ id: "cat-1", name: "Politics", slug: "politics" }],
   likeCount: 12,
