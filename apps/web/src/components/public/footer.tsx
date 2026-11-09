@@ -30,9 +30,7 @@ const footerLinks = {
   ],
   company: [
     { label: "About Us", href: "/about" },
-    { label: "Editorial Policy", href: "/editorial-policy" },
     { label: "Advertise", href: "/advertise" },
-    { label: "Careers", href: "/careers" },
     { label: "Contact", href: "/contact" },
   ],
   legal: [
