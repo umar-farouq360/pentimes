@@ -1,8 +1,8 @@
 "use client";
 
-import { useRouter, usePathname, useSearchParams } from "next/navigation";
+import Link from "next/link";
+import { usePathname, useSearchParams } from "next/navigation";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 interface PaginationProps {
@@ -18,7 +18,6 @@ export function Pagination({
   offset,
   className,
 }: PaginationProps) {
-  const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
@@ -27,10 +26,16 @@ export function Pagination({
 
   if (totalPages <= 1) return null;
 
-  const goToPage = (page: number) => {
+  const pageHref = (page: number): string => {
     const params = new URLSearchParams(searchParams.toString());
-    params.set("offset", String((page - 1) * limit));
-    router.push(`${pathname}?${params.toString()}`);
+    if (page <= 1) {
+      // Omit offset on page 1 so the canonical /articles URL is preserved.
+      params.delete("offset");
+    } else {
+      params.set("offset", String((page - 1) * limit));
+    }
+    const qs = params.toString();
+    return qs ? `${pathname}?${qs}` : pathname;
   };
 
   const pages: (number | "...")[] = [];
@@ -50,56 +55,93 @@ export function Pagination({
     pages.push(totalPages);
   }
 
+  const isFirst = currentPage === 1;
+  const isLast = currentPage === totalPages;
+
+  const navButtonClasses =
+    "inline-flex items-center justify-center h-8 w-8 rounded-md border border-input bg-background hover:bg-muted text-foreground transition-colors disabled:opacity-50 disabled:pointer-events-none";
+
   return (
     <nav
       aria-label="Pagination"
       className={cn("flex items-center justify-center gap-1", className)}
     >
-      <Button
-        variant="outline"
-        size="icon-sm"
-        onClick={() => goToPage(currentPage - 1)}
-        disabled={currentPage === 1}
-        aria-label="Previous page"
-      >
-        <ChevronLeft className="h-4 w-4" />
-      </Button>
+      {/* Prev */}
+      {isFirst ? (
+        <span
+          className={cn(navButtonClasses, "opacity-50 pointer-events-none")}
+          aria-disabled="true"
+          aria-label="Previous page"
+        >
+          <ChevronLeft className="h-4 w-4" />
+        </span>
+      ) : (
+        <Link
+          href={pageHref(currentPage - 1)}
+          rel="prev"
+          className={navButtonClasses}
+          aria-label="Previous page"
+        >
+          <ChevronLeft className="h-4 w-4" />
+        </Link>
+      )}
 
+      {/* Page numbers */}
       {pages.map((page, idx) =>
         page === "..." ? (
           <span
             key={`ellipsis-${idx}`}
             className="px-2 text-muted-foreground text-body-sm"
+            aria-hidden="true"
           >
             …
           </span>
-        ) : (
-          <button
+        ) : page === currentPage ? (
+          <span
             key={page}
-            onClick={() => goToPage(page)}
             className={cn(
-              "h-8 w-8 rounded-md text-body-sm font-medium transition-colors",
-              page === currentPage
-                ? "bg-ink-900 text-white dark:bg-white dark:text-ink-900"
-                : "hover:bg-muted text-foreground",
+              "inline-flex items-center justify-center h-8 w-8 rounded-md text-body-sm font-medium",
+              "bg-ink-900 text-white dark:bg-white dark:text-ink-900",
             )}
             aria-label={`Page ${page}`}
-            aria-current={page === currentPage ? "page" : undefined}
+            aria-current="page"
           >
             {page}
-          </button>
+          </span>
+        ) : (
+          <Link
+            key={page}
+            href={pageHref(page)}
+            className={cn(
+              "inline-flex items-center justify-center h-8 w-8 rounded-md text-body-sm font-medium",
+              "hover:bg-muted text-foreground transition-colors",
+            )}
+            aria-label={`Page ${page}`}
+          >
+            {page}
+          </Link>
         ),
       )}
 
-      <Button
-        variant="outline"
-        size="icon-sm"
-        onClick={() => goToPage(currentPage + 1)}
-        disabled={currentPage === totalPages}
-        aria-label="Next page"
-      >
-        <ChevronRight className="h-4 w-4" />
-      </Button>
+      {/* Next */}
+      {isLast ? (
+        <span
+          className={cn(navButtonClasses, "opacity-50 pointer-events-none")}
+          aria-disabled="true"
+          aria-label="Next page"
+        >
+          <ChevronRight className="h-4 w-4" />
+        </span>
+      ) : (
+        <Link
+          href={pageHref(currentPage + 1)}
+          rel="next"
+          className={navButtonClasses}
+          aria-label="Next page"
+        >
+          <ChevronRight className="h-4 w-4" />
+        </Link>
+      )}
     </nav>
   );
 }

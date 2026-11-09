@@ -27,16 +27,10 @@ const footerLinks = {
       label: "Programs",
       href: "/programs",
     },
-    {
-      label: "Photo News",
-      href: "/articles?category=photo-news",
-    },
   ],
   company: [
     { label: "About Us", href: "/about" },
-    { label: "Editorial Policy", href: "/editorial-policy" },
     { label: "Advertise", href: "/advertise" },
-    { label: "Careers", href: "/careers" },
     { label: "Contact", href: "/contact" },
   ],
   legal: [

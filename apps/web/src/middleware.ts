@@ -20,6 +20,8 @@ const API_BASE = normalizeBaseUrl(
 );
 
 const REFRESH_MUTATION = 'mutation RefreshSession { refreshToken { user { id } } }';
+const ARTICLE_EXISTS_QUERY =
+  'query ArticleExists($slug: String!) { article(slug: $slug) { id } }';
 
 // Refresh when fewer than this many seconds remain on the access token.
 const REFRESH_SKEW_SECONDS = 30;
@@ -45,6 +47,51 @@ function cookiePair(setCookie: string): { name: string; value: string } | null {
 }
 
 export async function middleware(request: NextRequest): Promise<NextResponse> {
+  // App Router can start streaming before an async page discovers that an
+  // article is missing. Once streaming starts, Next.js must keep the status
+  // at 200. Check document/HEAD requests here so missing articles can return
+  // a real 404 before the page renderer begins.
+  const articleMatch = request.nextUrl.pathname.match(/^\/articles\/([^/]+)\/?$/);
+  const acceptsHtml = request.headers.get('accept')?.includes('text/html');
+  if (articleMatch && (request.method === 'HEAD' || (request.method === 'GET' && acceptsHtml))) {
+    try {
+      const slug = decodeURIComponent(articleMatch[1]);
+      const apiResponse = await fetch(`${API_BASE}/graphql`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          ...(request.headers.get('cookie')
+            ? { Cookie: request.headers.get('cookie')! }
+            : {}),
+          ...(process.env['INTERNAL_API_KEY']
+            ? { 'x-internal-key': process.env['INTERNAL_API_KEY'] }
+            : {}),
+        },
+        body: JSON.stringify({ query: ARTICLE_EXISTS_QUERY, variables: { slug } }),
+      });
+      if (apiResponse.ok) {
+        const result = (await apiResponse.json()) as {
+          data?: { article?: { id: string } | null };
+          errors?: unknown[];
+        };
+        if (!result.errors?.length && result.data?.article === null) {
+          const body = request.method === 'HEAD' ? null : `<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="robots" content="noindex"><title>Article not found | Pen Times</title></head>
+<body><main><p>404</p><h1>Article not found</h1><p>This article may have been moved or is no longer available.</p><p><a href="/articles">Browse articles</a> · <a href="/">Go home</a></p></main></body></html>`;
+          return new NextResponse(body, {
+            status: 404,
+            headers: {
+              'Content-Type': 'text/html; charset=utf-8',
+              'Cache-Control': 'no-store',
+            },
+          });
+        }
+      }
+    } catch {
+      // Let the page renderer handle API and URL errors as usual.
+    }
+  }
+
   const refreshToken = request.cookies.get('refresh_token')?.value;
   if (!refreshToken) return NextResponse.next();
 
