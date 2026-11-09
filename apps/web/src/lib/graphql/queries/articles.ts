@@ -16,6 +16,7 @@ export const ARTICLE_CARD_FIELDS = gql`
       id
       name
       avatar
+      bio
     }
     categories {
       id

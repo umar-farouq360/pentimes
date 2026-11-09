@@ -38,6 +38,7 @@ export interface ArticleCardType {
     id: string;
     name: string;
     avatar: string | null;
+    bio?: string | null;
   };
   categories: Array<{
     id: string;
