@@ -27,10 +27,6 @@ const footerLinks = {
       label: "Programs",
       href: "/programs",
     },
-    {
-      label: "Photo News",
-      href: "/articles?category=photo-news",
-    },
   ],
   company: [
     { label: "About Us", href: "/about" },
