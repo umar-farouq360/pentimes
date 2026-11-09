@@ -36,24 +36,36 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const client = cachedClient(300);
+  const siteUrl = process.env["NEXT_PUBLIC_SITE_URL"] ?? "";
 
   try {
     const data = await client.request<ArticleResult>(GET_ARTICLE, { slug });
     const article = data.article;
     if (!article) return {};
 
+    const canonicalUrl = `${siteUrl}/articles/${article.slug}`;
+    const ogImage = article.coverImage
+      ? [{ url: article.coverImage, alt: article.title }]
+      : [DEFAULT_OG_IMAGE];
+
     return {
+      metadataBase: siteUrl ? new URL(siteUrl) : undefined,
       title: article.title,
       description: article.excerpt ?? undefined,
+      keywords: article.categories.map((c) => c.name),
+      alternates: {
+        canonical: canonicalUrl,
+      },
       openGraph: {
         title: article.title,
         description: article.excerpt ?? undefined,
-        images: article.coverImage
-          ? [{ url: article.coverImage }]
-          : [DEFAULT_OG_IMAGE],
+        url: canonicalUrl,
+        siteName: "Pen Times Magazine",
+        images: ogImage,
         type: "article",
         publishedTime: article.publishedAt ?? undefined,
-        authors: [article.author.name],
+        modifiedTime: article.updatedAt ?? undefined,
+        authors: article.author?.name ? [article.author.name] : undefined,
       },
       twitter: {
         card: "summary_large_image",
@@ -62,6 +74,17 @@ export async function generateMetadata({
         images: article.coverImage
           ? [article.coverImage]
           : [DEFAULT_OG_IMAGE.url],
+      },
+      robots: {
+        index: true,
+        follow: true,
+        googleBot: {
+          index: true,
+          follow: true,
+          "max-image-preview": "large",
+          "max-snippet": -1,
+          "max-video-preview": -1,
+        },
       },
     };
   } catch {
