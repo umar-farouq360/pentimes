@@ -33,6 +33,7 @@ export interface ArticleCardType {
   readingTime: number;
   publishedAt: string | null;
   createdAt: string;
+  updatedAt: string | null;
   author: {
     id: string;
     name: string;
