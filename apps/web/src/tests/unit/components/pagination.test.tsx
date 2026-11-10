@@ -29,15 +29,15 @@ describe("Pagination", () => {
     expect(screen.getByLabelText("Pagination")).toBeDefined();
   });
 
-  it("renders previous button disabled on first page", () => {
+  it("marks the previous control disabled on the first page", () => {
     renderPagination({ total: 30, limit: 12, offset: 0 });
     const prevBtn = screen.getByLabelText("Previous page");
-    expect((prevBtn as HTMLButtonElement).disabled).toBe(true);
+    expect(prevBtn).toHaveAttribute("aria-disabled", "true");
   });
 
-  it("renders next button disabled on last page", () => {
+  it("marks the next control disabled on the last page", () => {
     renderPagination({ total: 24, limit: 12, offset: 12 });
     const nextBtn = screen.getByLabelText("Next page");
-    expect((nextBtn as HTMLButtonElement).disabled).toBe(true);
+    expect(nextBtn).toHaveAttribute("aria-disabled", "true");
   });
 });
