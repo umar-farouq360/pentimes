@@ -1,7 +1,15 @@
 import { z } from 'zod';
 import type { ScheduledProgramSelect } from '../db/schema/index.js';
 
-export type ScheduledProgram = ScheduledProgramSelect;
+// Database rows contain Date objects, while JSON-backed Redis cache entries
+// restore these fields as ISO strings. The GraphQL type handles both forms.
+export type ScheduledProgram = Omit<
+  ScheduledProgramSelect,
+  'scheduledAt' | 'createdAt'
+> & {
+  scheduledAt: Date | string;
+  createdAt: Date | string;
+};
 
 export const CreateScheduledProgramSchema = z.object({
   title: z
