@@ -12,7 +12,7 @@
 # ──────────────────────────────────────────────────────────────────
 
 # ── Stage 1: Base
-FROM node:20.15.1-alpine3.20 AS base
+FROM node:24.22.2-alpine3.24 AS base
 
 RUN apk add --no-cache libc6-compat openssl
 
@@ -73,7 +73,7 @@ RUN pnpm --filter api build
 RUN pnpm --filter api --prod deploy /app/prod-deploy
 
 # ── Stage 5: Production
-FROM node:20.15.1-alpine3.20 AS production
+FROM node:24.22.2-alpine3.24 AS production
 
 RUN apk add --no-cache libc6-compat openssl wget
 

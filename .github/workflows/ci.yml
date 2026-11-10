@@ -43,11 +43,11 @@ jobs:
       - name: Set up pnpm
         uses: pnpm/action-setup@v4
 
-      # Same Node version as the Docker images (node:20.15.1-alpine).
+      # Same Node version as the Docker images; Vite 8 requires Node 20.19+.
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20.15.1
+          node-version: 24.22.2
           cache: pnpm
 
       - name: Install dependencies
