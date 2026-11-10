@@ -1,6 +1,10 @@
 import { builder } from '../builder.js';
 import type { ScheduledProgram } from '../../types/scheduled-program.type.js';
 
+function serializeDate(value: Date | string): string {
+  return (value instanceof Date ? value : new Date(value)).toISOString();
+}
+
 export const ScheduledProgramType = builder.objectRef<ScheduledProgram>('ScheduledProgram').implement({
   fields: (t) => ({
     id: t.exposeString('id'),
@@ -10,11 +14,11 @@ export const ScheduledProgramType = builder.objectRef<ScheduledProgram>('Schedul
     status: t.exposeString('status'),
     scheduledAt: t.field({
       type: 'String',
-      resolve: (p) => (p.scheduledAt as Date).toISOString(),
+      resolve: (p) => serializeDate(p.scheduledAt),
     }),
     createdAt: t.field({
       type: 'String',
-      resolve: (p) => (p.createdAt as Date).toISOString(),
+      resolve: (p) => serializeDate(p.createdAt),
     }),
   }),
 });
