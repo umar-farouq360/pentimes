@@ -38,16 +38,19 @@ const dmMono = localFont({
   display: "swap",
 });
 
+const SITE_URL = process.env["NEXT_PUBLIC_SITE_URL"] ?? "https://pentimes.ng";
+
+const SITE_NAME = "Pen Times Magazine";
+const SITE_DESCRIPTION =
+  "Your trusted source for news, politics, education, and community development from Katsina State and beyond.";
+
 export const metadata: Metadata = {
-  metadataBase: new URL(
-    process.env["NEXT_PUBLIC_SITE_URL"] ?? "https://pentimes.ng",
-  ),
+  metadataBase: new URL(SITE_URL),
   title: {
-    default: "Pen Times Magazine — Katsina's Voice",
-    template: "%s | Pen Times Magazine",
+    default: `${SITE_NAME} — Katsina's Voice`,
+    template: `%s | ${SITE_NAME}`,
   },
-  description:
-    "Pen Times Magazine — Your trusted source for news, politics, education, and community development from Katsina State and beyond.",
+  description: SITE_DESCRIPTION,
   keywords: [
     "Katsina news",
     "Nigerian politics",
@@ -56,36 +59,61 @@ export const metadata: Metadata = {
     "Pen Times",
   ],
   authors: [{ name: "Pen Times Editorial Team" }],
-  creator: "Pen Times Magazine",
+  creator: SITE_NAME,
   publisher: "Pen Times Media",
+  category: "news",
+  applicationName: SITE_NAME,
   manifest: "/manifest.webmanifest",
+  alternates: {
+    canonical: SITE_URL,
+  },
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },
       { url: "/icon-512.png", sizes: "512x512", type: "image/png" },
       { url: "/icon-192.png", sizes: "192x192", type: "image/png" },
     ],
-    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
   },
   openGraph: {
     type: "website",
     locale: "en_NG",
-    siteName: "Pen Times Magazine",
-    title: "Pen Times Magazine — Katsina's Voice",
-    description: 
-    "Your trusted source for news, politics, education, and community development from Katsina State and beyond.",
+    siteName: SITE_NAME,
+    title: `${SITE_NAME} — Katsina's Voice`,
+    description: SITE_DESCRIPTION,
+    url: SITE_URL,
     images: [DEFAULT_OG_IMAGE],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Pen Times Magazine",
+    site: "@pentimes",
+    creator: "@pentimes",
+    title: SITE_NAME,
     description: "Katsina's trusted digital magazine.",
     images: [DEFAULT_OG_IMAGE.url],
   },
   robots: {
     index: true,
     follow: true,
-    googleBot: { index: true, follow: true },
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+  appleWebApp: {
+    capable: true,
+    title: "Pen Times",
+    statusBarStyle: "default",
+  },
+  formatDetection: {
+    telephone: false,
+    address: false,
+    email: false,
   },
 };
 
@@ -96,6 +124,66 @@ export const viewport: Viewport = {
     { media: "(prefers-color-scheme: light)", color: "#f6faf6" },
     { media: "(prefers-color-scheme: dark)", color: "#0c130e" },
   ],
+};
+
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: SITE_NAME,
+  url: SITE_URL,
+  inLanguage: "en-NG",
+  publisher: {
+    "@type": "NewsMediaOrganization",
+    name: SITE_NAME,
+  },
+  potentialAction: {
+    "@type": "SearchAction",
+    target: {
+      "@type": "EntryPoint",
+      urlTemplate: `${SITE_URL}/search?q={search_term_string}`,
+    },
+    "query-input": "required name=search_term_string",
+  },
+};
+
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "NewsMediaOrganization",
+  name: SITE_NAME,
+  alternateName: "Pen Times",
+  url: SITE_URL,
+  logo: {
+    "@type": "ImageObject",
+    url: `${SITE_URL}/logo.png`,
+    width: 512,
+    height: 512,
+  },
+  description: SITE_DESCRIPTION,
+  sameAs: [
+    "https://twitter.com/pentimes",
+    "https://facebook.com/pentimes",
+    "https://instagram.com/pentimes",
+  ],
+  contactPoint: [
+    {
+      "@type": "ContactPoint",
+      contactType: "editorial",
+      email: "editor@pentimes.ng",
+      availableLanguage: ["English"],
+    },
+    {
+      "@type": "ContactPoint",
+      contactType: "news tips",
+      email: "tips@pentimes.ng",
+      availableLanguage: ["English"],
+    },
+  ],
+  foundingDate: "2024",
+  address: {
+    "@type": "PostalAddress",
+    addressRegion: "Katsina State",
+    addressCountry: "NG",
+  },
 };
 
 export default function RootLayout({
@@ -109,6 +197,18 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${playfair.variable} ${dmSans.variable} ${dmMono.variable}`}
     >
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(organizationJsonLd),
+          }}
+        />
+      </head>
       <body>
         <Providers>{children}</Providers>
       </body>

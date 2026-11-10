@@ -46,14 +46,14 @@ export async function generateMetadata({
   const author = result?.items[0]?.author;
 
   if (result && !author) notFound();
-  if (!author) return { title: "Author — Pen Times Magazine" };
+  if (!author) return { title: "Author" };
 
   return {
-    title: `${author.name} — Pen Times Magazine`,
+    title: `${author.name}`,
     description:
       author.bio ?? `Read the latest articles by ${author.name} on Pen Times Magazine.`,
     openGraph: {
-      title: `${author.name} — Pen Times Magazine`,
+      title: `${author.name}`,
       description:
         author.bio ?? `Read the latest articles by ${author.name} on Pen Times Magazine.`,
       type: "profile",

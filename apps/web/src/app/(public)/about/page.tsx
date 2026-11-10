@@ -14,7 +14,7 @@ import { Button } from "@/components/ui/button";
 import { DEFAULT_OG_IMAGE } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "About Us — Pen Times Magazine",
+  title: "About Us",
   description:
     "Learn about Pen Times Magazine — Katsina's trusted source for news, politics, education, and community development since 2024.",
   openGraph: {

@@ -27,7 +27,7 @@ export async function generateMetadata({
     const cat = data.category;
     if (!cat) return {};
     return {
-      title: `${cat.name} — Pen Times Magazine`,
+      title: `${cat.name}`,
       description:
         cat.description ?? `Latest ${cat.name} news from Pen Times Magazine`,
     };

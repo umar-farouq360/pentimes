@@ -42,7 +42,7 @@ export async function generateMetadata({
   const title = "All Articles";
   const description = "Browse all articles from Pen Times Magazine";
   const ogBase = {
-    title: `${title} | Pen Times Magazine`,
+    title: `${title}`,
     description,
     siteName: "Pen Times Magazine",
     locale: "en_NG",

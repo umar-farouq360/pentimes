@@ -2,9 +2,9 @@ import { Mail, MessageCircle, Phone } from "lucide-react";
 
 // Add the publication's current contact details here; both contact pages use them.
 const CONTACT_DETAILS = {
-  mobile: "",
-  email: "",
-  whatsappUrl: "",
+  mobile: "+234 803 474 0345",
+  email: "info@pentimes.com",
+  whatsappUrl: "https://wa.me/2348034740345",
 };
 
 const channels = [
