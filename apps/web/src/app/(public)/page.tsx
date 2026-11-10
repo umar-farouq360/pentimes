@@ -18,7 +18,6 @@ import type {
 } from "@/types";
 
 export const metadata: Metadata = {
-  title: "Pen Times Magazine — Katsina's Voice",
   description:
     "Your trusted source for news, politics, education, and community development from Katsina State and beyond.",
   alternates: {
