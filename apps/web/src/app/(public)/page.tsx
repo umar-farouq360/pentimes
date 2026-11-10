@@ -9,7 +9,6 @@ import { ArticleCard } from "@/components/ui/article-card";
 import { SectionHeader } from "@/components/public/section-header";
 import { CategoryBadge } from "@/components/ui/category-badge";
 import { FeaturedSlider } from "@/components/public/featured-slider";
-import { BreakingNewsTicker } from "@/components/public/breaking-news-ticker";
 import { formatDate, cn } from "@/lib/utils";
 import type {
   ArticleCardType,
@@ -83,7 +82,6 @@ export default async function HomePage() {
   return (
     <>
       {/* ── Breaking news ticker ──────────────────────────────── */}
-      <BreakingNewsTicker />
 
       <div className="max-w-container-lg mx-auto px-4 sm:px-6 py-8">
         {/* ── Hero: Featured slider + sidebar ──────────────────── */}
