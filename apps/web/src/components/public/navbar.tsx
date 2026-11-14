@@ -92,7 +92,7 @@ export function Navbar() {
           </Link>
 
           <div className="hidden sm:block text-caption text-muted-foreground text-center">
-            <p className="font-medium">Katsina&apos;s Voice</p>
+            <p className="font-medium">Muryar Jama'a</p>
             <p className="text-[0.6rem] uppercase tracking-widest">Est. 2024</p>
           </div>
 
