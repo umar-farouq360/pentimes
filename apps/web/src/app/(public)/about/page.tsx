@@ -89,7 +89,7 @@ export default function AboutPage() {
           Est. 2024
         </p>
         <h1 className="font-serif text-display font-bold text-foreground leading-tight mb-6">
-          Katsina's Voice,{" "}
+          Muryar Jama'a,{" "}
           <em className="not-italic text-amber-600">Your Story</em>
         </h1>
         <p className="text-body-lg text-muted-foreground leading-relaxed mb-4">
