@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     process.env["NEXT_PUBLIC_SITE_URL"] ?? "https://pentimes.ng",
   ),
   title: {
-    default: "Pen Times Magazine — Katsina's Voice",
+    default: "Pen Times Magazine — Muryar Jama'a",
     template: "%s | Pen Times Magazine",
   },
   description:
@@ -59,7 +59,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_NG",
     siteName: "Pen Times Magazine",
-    title: "Pen Times Magazine — Katsina's Voice",
+    title: "Pen Times Magazine — Muryar Jama'a",
     description: 
     "Your trusted source for news, politics, education, and community development from Katsina State and beyond.",
     images: [DEFAULT_OG_IMAGE],
