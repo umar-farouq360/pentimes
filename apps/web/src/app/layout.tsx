@@ -47,7 +47,7 @@ const SITE_DESCRIPTION =
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: `${SITE_NAME} — Katsina's Voice`,
+    default: `${SITE_NAME} — Muryar Jama'a`,
     template: `%s | ${SITE_NAME}`,
   },
   description: SITE_DESCRIPTION,
@@ -81,7 +81,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_NG",
     siteName: SITE_NAME,
-    title: `${SITE_NAME} — Katsina's Voice`,
+    title: `${SITE_NAME} — Muryar Jama'a`,
     description: SITE_DESCRIPTION,
     url: SITE_URL,
     images: [DEFAULT_OG_IMAGE],

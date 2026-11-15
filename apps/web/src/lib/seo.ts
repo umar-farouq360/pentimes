@@ -13,5 +13,5 @@ export const DEFAULT_OG_IMAGE = {
   url: '/og-default.png',
   width: 1200,
   height: 630,
-  alt: "Pen Times Magazine — Katsina's Voice",
+  alt: "Pen Times Magazine — Muryar Jama'a",
 };

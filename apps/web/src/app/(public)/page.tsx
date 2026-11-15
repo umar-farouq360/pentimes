@@ -216,7 +216,7 @@ export default async function HomePage() {
               Our Mission
             </span>
             <h2 className="font-serif text-headline-xl sm:text-display font-bold mb-4 text-balance leading-tight">
-              Katsina&apos;s Voice,
+              Muryar Jama'a,
               <br />
               <em className="text-amber-400 not-italic">Your Story</em>
             </h2>

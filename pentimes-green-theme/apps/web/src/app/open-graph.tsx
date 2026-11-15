@@ -14,7 +14,7 @@ import { ImageResponse } from "next/og";
  */
 
 export const runtime = "edge";
-export const alt = "Pen Times Magazine — Katsina's Voice";
+export const alt = "Pen Times Magazine — Muryar Jama'a";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
