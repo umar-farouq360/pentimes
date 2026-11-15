@@ -31,6 +31,7 @@ export interface Article {
   title: string;
   slug: string;
   excerpt: string;
+  coverageState: string | null;
   content: string;
   coverImage: string | null;
   status: ArticleStatus;
