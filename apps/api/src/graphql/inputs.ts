@@ -55,6 +55,7 @@ export const UpdateArticleInput = builder.inputType('UpdateArticleInput', {
   fields: (t) => ({
     title: t.string({ required: false }),
     excerpt: t.string({ required: false }),
+    coverageState: t.string({ required: false }),
     content: t.string({ required: false }),
     coverImage: t.string({ required: false }),
     status: t.string({ required: false }),
