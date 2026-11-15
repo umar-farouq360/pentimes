@@ -61,7 +61,10 @@ export async function generateMetadata({
     metadataBase: siteUrl ? new URL(siteUrl) : undefined,
     title: article.title,
     description: article.excerpt ?? undefined,
-    keywords: article.categories.map((c) => c.name),
+    keywords: [
+      ...article.categories.map((c) => c.name),
+      ...(article.coverageState ? [article.coverageState, 'North West Nigeria'] : []),
+    ],
     alternates: {
       canonical: canonicalUrl,
     },
@@ -157,6 +160,9 @@ export default async function ArticlePage({
     headline: article.title,
     description: article.excerpt,
     image: article.coverImage,
+    spatialCoverage: article.coverageState
+      ? { '@type': 'AdministrativeArea', name: `${article.coverageState}, North West Nigeria` }
+      : undefined,
     datePublished: article.publishedAt,
     dateModified: article.updatedAt,
     author: {
@@ -191,6 +197,11 @@ export default async function ArticlePage({
                 <CategoryBadge key={cat.id} name={cat.name} slug={cat.slug} />
               ))}
             </div>
+            {article.coverageState && (
+              <p className="text-caption text-muted-foreground mb-4">
+                {article.coverageState} · North West Nigeria
+              </p>
+            )}
 
             {/* Title */}
             <h1 className="font-serif text-headline-xl sm:text-display font-bold leading-tight mb-4 text-balance">
