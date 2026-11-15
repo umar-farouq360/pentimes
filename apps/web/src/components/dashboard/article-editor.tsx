@@ -42,6 +42,14 @@ import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
 import type { ArticleFullType, CategoryType } from "@/types";
 import { getAuthClient } from "@/lib/graphql/browser-client";
+import { NORTH_WEST_STATES } from '@pentimes/shared';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 
 // Slugify helper
 const slugify = (text: string): string =>
@@ -59,6 +67,8 @@ const calcReadingTime = (html: string): number => {
   return Math.max(1, Math.ceil(words / 200));
 };
 
+const COVERAGE_STATE_OPTIONS = [...NORTH_WEST_STATES, 'none'] as const;
+
 const EditorSchema = z.object({
   title: z
     .string()
@@ -70,6 +80,7 @@ const EditorSchema = z.object({
     .max(500, "Excerpt cannot exceed 500 characters")
     .trim()
     .optional(),
+  coverageState: z.enum(COVERAGE_STATE_OPTIONS),
   slug: z
     .string()
     .regex(
@@ -282,6 +293,7 @@ export function ArticleEditor({ categories: initialCategories, article }: Articl
     defaultValues: {
       title: article?.title ?? "",
       excerpt: article?.excerpt ?? "",
+      coverageState: article?.coverageState ?? "none",
       slug: article?.slug ?? "",
       categoryIds: article?.categories.map((c) => c.id) ?? [],
       status: article?.status ?? "draft",
@@ -350,6 +362,7 @@ export function ArticleEditor({ categories: initialCategories, article }: Articl
           input: {
             title: data.title,
             excerpt: data.excerpt || null,
+            coverageState: data.coverageState === "none" ? null : data.coverageState,
             content,
             coverImage: data.coverImage || null,
             status: data.status,
@@ -497,6 +510,38 @@ export function ArticleEditor({ categories: initialCategories, article }: Articl
             {watch("excerpt")?.length ?? 0}/500
           </span>
         </div>
+      </div>
+
+      {/* ── Regional coverage metadata ── */}
+      <div className="space-y-2">
+        <Label htmlFor="coverageState" className="text-body-sm font-semibold">
+          Coverage area
+          <span className="ml-1.5 text-caption text-muted-foreground font-normal">
+            (optional — select the primary North West Nigeria state covered)
+          </span>
+        </Label>
+        <Controller
+          control={control}
+          name="coverageState"
+          render={({ field }) => (
+            <Select value={field.value} onValueChange={field.onChange}>
+              <SelectTrigger id="coverageState">
+                <SelectValue placeholder="Select a coverage state" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="none">Not specified</SelectItem>
+                {NORTH_WEST_STATES.map((state) => (
+                  <SelectItem key={state} value={state}>
+                    {state}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          )}
+        />
+        <p className="text-caption text-muted-foreground">
+          Leave unspecified when a story is not tied to one state. This label does not change site navigation.
+        </p>
       </div>
 
       {/* ── Cover Image ── */}
