@@ -42,7 +42,7 @@ import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
 import type { ArticleFullType, CategoryType } from "@/types";
 import { getAuthClient } from "@/lib/graphql/browser-client";
-import { NORTH_WEST_STATES } from '@pentimes/shared';
+import { NORTH_WEST_STATES } from '@pentimes/shared/constants';
 import {
   Select,
   SelectContent,
