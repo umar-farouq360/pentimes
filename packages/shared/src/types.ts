@@ -50,6 +50,7 @@ export type ArticleCard = Pick<
   | 'title'
   | 'slug'
   | 'excerpt'
+  | 'coverageState'
   | 'coverImage'
   | 'status'
   | 'author'
