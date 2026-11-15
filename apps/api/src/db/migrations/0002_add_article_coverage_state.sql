@@ -1,1 +1,1 @@
-ALTER TABLE "articles" ADD COLUMN "coverage_state" varchar(32);
+ALTER TABLE "articles" ADD COLUMN IF NOT EXISTS "coverage_state" varchar(32);
