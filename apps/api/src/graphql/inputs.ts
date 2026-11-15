@@ -42,6 +42,7 @@ export const CreateArticleInput = builder.inputType('CreateArticleInput', {
   fields: (t) => ({
     title: t.string({ required: true }),
     excerpt: t.string({ required: false }),
+    coverageState: t.string({ required: false }),
     content: t.string({ required: true }),
     coverImage: t.string({ required: false }),
     status: t.string({ required: false, defaultValue: 'draft' }),
