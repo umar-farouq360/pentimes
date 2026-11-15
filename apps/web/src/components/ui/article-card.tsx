@@ -94,6 +94,11 @@ export function ArticleCard({
                   className="text-[0.6rem]"
                 />
               ))}
+              {article.coverageState && (
+                <span className="text-[0.6rem] text-muted-foreground font-medium">
+                  {article.coverageState} · North West Nigeria
+                </span>
+              )}
               {showStatus && <ArticleStatusBadge status={article.status} />}
             </div>
             <Link href={`/articles/${article.slug}`}>
