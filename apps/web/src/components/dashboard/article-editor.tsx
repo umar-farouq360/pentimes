@@ -384,6 +384,7 @@ export function ArticleEditor({ categories: initialCategories, article }: Articl
           input: {
             title: data.title,
             excerpt: data.excerpt || null,
+            coverageState: data.coverageState === "none" ? null : data.coverageState,
             content,
             coverImage: data.coverImage || null,
             status: data.status,
