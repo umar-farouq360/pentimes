@@ -18,6 +18,19 @@ export const USER_ROLE_VALUES = Object.values(USER_ROLES) as [
   ...UserRole[],
 ];
 
+// ── North West Nigeria editorial coverage ────────────────────────
+export const NORTH_WEST_STATES = [
+  'Jigawa',
+  'Kaduna',
+  'Kano',
+  'Katsina',
+  'Kebbi',
+  'Sokoto',
+  'Zamfara',
+] as const;
+
+export type NorthWestState = (typeof NORTH_WEST_STATES)[number];
+
 // ── Article Status ────────────────────────────────────────────────
 export const ARTICLE_STATUS = {
   DRAFT: 'draft',
