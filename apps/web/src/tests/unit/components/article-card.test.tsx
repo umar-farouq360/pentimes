@@ -9,6 +9,7 @@ const mockArticle: ArticleCardType = {
   title: "Breaking News From Katsina",
   slug: "breaking-news-katsina",
   excerpt: "An important development in Katsina State today.",
+  coverageState: "Katsina",
   coverImage: null,
   status: "published",
   views: 500,
@@ -28,6 +29,11 @@ describe("ArticleCard — vertical variant", () => {
   it("renders title", () => {
     render(<ArticleCard article={mockArticle} variant="vertical" />);
     expect(screen.getByText("Breaking News From Katsina")).toBeDefined();
+  });
+
+  it("renders regional coverage label when supplied", () => {
+    render(<ArticleCard article={mockArticle} variant="vertical" />);
+    expect(screen.getByText("Katsina · North West Nigeria")).toBeDefined();
   });
 
   it("renders category badge", () => {
