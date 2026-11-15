@@ -34,6 +34,8 @@ export const articles = pgTable(
 
     excerpt: varchar('excerpt', { length: 500 }),
 
+    coverageState: varchar('coverage_state', { length: 32 }),
+
     content: text('content').notNull(),
 
     coverImage: text('cover_image'),
