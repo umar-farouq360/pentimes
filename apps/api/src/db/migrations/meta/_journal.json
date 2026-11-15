@@ -8,6 +8,13 @@
       "when": 1779274461223,
       "tag": "0000_yummy_wonder_man",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1794700000000,
+      "tag": "0002_add_article_coverage_state",
+      "breakpoints": true
     }
   ]
 }

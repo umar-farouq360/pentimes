@@ -15,6 +15,7 @@ export const ArticleType = builder
       title: t.exposeString('title'),
       slug: t.exposeString('slug'),
       excerpt: t.exposeString('excerpt', { nullable: true }),
+      coverageState: t.exposeString('coverageState', { nullable: true }),
       content: t.exposeString('content'),
       coverImage: t.exposeString('coverImage', { nullable: true }),
       status: t.exposeString('status'),

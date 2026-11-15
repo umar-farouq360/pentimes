@@ -56,18 +56,27 @@ export async function generateMetadata({
   const ogImage = article.coverImage
     ? [{ url: article.coverImage, alt: article.title }]
     : [DEFAULT_OG_IMAGE];
+  const regionalContext = article.coverageState
+    ? ` Coverage: ${article.coverageState}, North West Nigeria.`
+    : '';
+  const articleDescription = article.excerpt
+    ? `${article.excerpt}${regionalContext}`
+    : regionalContext.trim() || undefined;
 
   return {
     metadataBase: siteUrl ? new URL(siteUrl) : undefined,
     title: article.title,
-    description: article.excerpt ?? undefined,
-    keywords: article.categories.map((c) => c.name),
+    description: articleDescription,
+    keywords: [
+      ...article.categories.map((c) => c.name),
+      ...(article.coverageState ? [article.coverageState, 'North West Nigeria'] : []),
+    ],
     alternates: {
       canonical: canonicalUrl,
     },
     openGraph: {
       title: article.title,
-      description: article.excerpt ?? undefined,
+      description: articleDescription,
       url: canonicalUrl,
       siteName: "Pen Times Magazine",
       images: ogImage,
@@ -79,7 +88,7 @@ export async function generateMetadata({
     twitter: {
       card: "summary_large_image",
       title: article.title,
-      description: article.excerpt ?? undefined,
+      description: articleDescription,
       images: article.coverImage
         ? [article.coverImage]
         : [DEFAULT_OG_IMAGE.url],
@@ -157,6 +166,9 @@ export default async function ArticlePage({
     headline: article.title,
     description: article.excerpt,
     image: article.coverImage,
+    spatialCoverage: article.coverageState
+      ? { '@type': 'AdministrativeArea', name: `${article.coverageState}, North West Nigeria` }
+      : undefined,
     datePublished: article.publishedAt,
     dateModified: article.updatedAt,
     author: {
@@ -191,6 +203,11 @@ export default async function ArticlePage({
                 <CategoryBadge key={cat.id} name={cat.name} slug={cat.slug} />
               ))}
             </div>
+            {article.coverageState && (
+              <p className="text-caption text-muted-foreground mb-4">
+                {article.coverageState} · North West Nigeria
+              </p>
+            )}
 
             {/* Title */}
             <h1 className="font-serif text-headline-xl sm:text-display font-bold leading-tight mb-4 text-balance">

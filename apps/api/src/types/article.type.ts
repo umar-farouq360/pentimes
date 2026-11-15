@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { NORTH_WEST_STATES } from '@pentimes/shared';
 import type { ArticleSelect }  from '../db/schema/index.js';
 import type { PublicUser }     from './user.type.js';
 import type { CategorySelect } from '../db/schema/index.js';
@@ -55,6 +56,7 @@ export const CreateArticleSchema = z.object({
     .trim()
     .optional(),
 
+  coverageState: z.enum(NORTH_WEST_STATES).nullable().optional(),
   content: z.string().min(1, 'Article content cannot be empty'),
 
   coverImage: z.string().url('Cover image must be a valid URL').optional(),
@@ -97,6 +99,7 @@ export const UpdateArticleSchema = z.object({
     .trim()
     .optional(),
 
+  coverageState: z.enum(NORTH_WEST_STATES).nullable().optional(),
   content: z.string().min(1, 'Article content cannot be empty').optional(),
 
   coverImage: z

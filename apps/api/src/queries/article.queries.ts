@@ -92,6 +92,7 @@ export async function createArticle(data: {
   title: string;
   slug: string;
   excerpt?: string | null;
+  coverageState?: string | null;
   content: string;
   coverImage?: string | null;
   status: 'draft' | 'published';
@@ -109,6 +110,7 @@ export async function updateArticle(
     title: string;
     slug: string;
     excerpt: string | null;
+    coverageState: string | null;
     content: string;
     coverImage: string | null;
     status: 'draft' | 'published';
