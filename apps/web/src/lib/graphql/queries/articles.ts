@@ -6,6 +6,7 @@ export const ARTICLE_CARD_FIELDS = gql`
     title
     slug
     excerpt
+    coverageState
     coverImage
     status
     views
@@ -36,6 +37,7 @@ export const ARTICLE_FULL_FIELDS = gql`
     title
     slug
     excerpt
+    coverageState
     content
     coverImage
     status
