@@ -293,7 +293,7 @@ export function ArticleEditor({ categories: initialCategories, article }: Articl
     defaultValues: {
       title: article?.title ?? "",
       excerpt: article?.excerpt ?? "",
-      coverageState: article?.coverageState ?? "none",
+      coverageState: NORTH_WEST_STATES.find((state) => state === article?.coverageState) ?? "none",
       slug: article?.slug ?? "",
       categoryIds: article?.categories.map((c) => c.id) ?? [],
       status: article?.status ?? "draft",
