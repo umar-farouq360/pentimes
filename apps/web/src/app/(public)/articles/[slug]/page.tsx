@@ -56,11 +56,17 @@ export async function generateMetadata({
   const ogImage = article.coverImage
     ? [{ url: article.coverImage, alt: article.title }]
     : [DEFAULT_OG_IMAGE];
+  const regionalContext = article.coverageState
+    ? ` Coverage: ${article.coverageState}, North West Nigeria.`
+    : '';
+  const articleDescription = article.excerpt
+    ? `${article.excerpt}${regionalContext}`
+    : regionalContext.trim() || undefined;
 
   return {
     metadataBase: siteUrl ? new URL(siteUrl) : undefined,
     title: article.title,
-    description: article.excerpt ?? undefined,
+    description: articleDescription,
     keywords: [
       ...article.categories.map((c) => c.name),
       ...(article.coverageState ? [article.coverageState, 'North West Nigeria'] : []),
@@ -70,7 +76,7 @@ export async function generateMetadata({
     },
     openGraph: {
       title: article.title,
-      description: article.excerpt ?? undefined,
+      description: articleDescription,
       url: canonicalUrl,
       siteName: "Pen Times Magazine",
       images: ogImage,
@@ -82,7 +88,7 @@ export async function generateMetadata({
     twitter: {
       card: "summary_large_image",
       title: article.title,
-      description: article.excerpt ?? undefined,
+      description: articleDescription,
       images: article.coverImage
         ? [article.coverImage]
         : [DEFAULT_OG_IMAGE.url],
