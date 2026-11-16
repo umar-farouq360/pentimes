@@ -71,8 +71,9 @@ export function Footer() {
               />
             </Link>
             <p className="text-caption text-white/60 leading-relaxed mb-4">
-              Katsina&apos;s most trusted source for news, politics, education,
-              and community development. Keeping you informed since 2024.
+              An independent digital news magazine serving communities across
+              North West Nigeria. Rooted in Katsina State, sharing the stories
+              that matter since 2024.
             </p>
             <div className="flex gap-3">
               {socials.map((s) => (

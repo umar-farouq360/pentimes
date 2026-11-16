@@ -16,11 +16,11 @@ import { DEFAULT_OG_IMAGE } from "@/lib/seo";
 export const metadata: Metadata = {
   title: "About Us",
   description:
-    "Learn about Pen Times Magazine — Katsina's trusted source for news, politics, education, and community development since 2024.",
+    "Learn about Pen Times Magazine, Muryar Jama'a — an independent digital news magazine serving communities across North West Nigeria since 2024.",
   openGraph: {
     title: "About Pen Times Magazine",
     description:
-      "Our mission, our team, and our commitment to quality journalism from Katsina State.",
+      "Our mission, our team, and our commitment to independent journalism serving communities across North West Nigeria, with roots in Katsina State.",
     images: [DEFAULT_OG_IMAGE],
   },
 };
@@ -36,7 +36,7 @@ const values = [
     icon: Users,
     title: "Community-Centred",
     description:
-      "Katsina and its people are at the heart of everything we do. We amplify grassroots voices alongside national and international coverage.",
+      "Rooted in Katsina State, we amplify grassroots voices and report on the issues that matter to communities across North West Nigeria.",
   },
   {
     icon: BookOpen,
@@ -61,7 +61,7 @@ const sections = [
   {
     label: "Politics",
     href: "/articles?category=politics",
-    description: "Nigerian and Katsina politics",
+    description: "Nigerian politics and public affairs across North West Nigeria",
   },
   {
     label: "Education",
@@ -93,9 +93,11 @@ export default function AboutPage() {
           <em className="not-italic text-amber-600">Your Story</em>
         </h1>
         <p className="text-body-lg text-muted-foreground leading-relaxed mb-4">
-          Pen Times Magazine was founded with a single belief: that the people
-          of Katsina State deserve quality, independent journalism that reflects
-          their lives, celebrates their community, and holds power accountable.
+          Pen Times Magazine was founded in Katsina State with a simple belief:
+          communities deserve quality, independent journalism that reflects
+          their lives, celebrates their voices, and holds power accountable.
+          Today, Muryar Jama'a serves readers and communities across North West
+          Nigeria.
         </p>
         <p className="text-body text-muted-foreground leading-relaxed">
           From the corridors of government to the classrooms of Dutsinma, from
@@ -116,9 +118,10 @@ export default function AboutPage() {
             </h2>
             <p className="text-body text-white/70 leading-relaxed">
               We believe access to reliable information is a right, not a
-              privilege. Pen Times Magazine delivers credible reporting in a
-              format that's accessible to all — from rural Katsina to the
-              Nigerian diaspora worldwide.
+              privilege. Pen Times Magazine delivers independent, credible
+              reporting for communities across North West Nigeria, with a
+              newsroom rooted in Katsina State and stories that connect local
+              voices to the wider world.
             </p>
           </div>
           <div className="flex items-center justify-center md:justify-end">
@@ -207,9 +210,10 @@ export default function AboutPage() {
             <h3 className="font-serif font-bold text-body">Where We Are</h3>
           </div>
           <p className="text-body-sm text-muted-foreground leading-relaxed">
-            Pen Times Magazine operates primarily from Katsina State, Nigeria.
-            Our reporters cover stories across the entire state and maintain
-            correspondents in Abuja and Lagos for national coverage.
+            Pen Times Magazine is rooted in Katsina State, Nigeria, and serves
+            communities across North West Nigeria. Our reporters cover stories
+            across Katsina State, with correspondents in Abuja and Lagos for
+            national coverage.
           </p>
         </div>
 

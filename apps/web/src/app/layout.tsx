@@ -42,7 +42,7 @@ const SITE_URL = process.env["NEXT_PUBLIC_SITE_URL"] ?? "https://pentimes.ng";
 
 const SITE_NAME = "Pen Times Magazine";
 const SITE_DESCRIPTION =
-  "Your trusted source for news, politics, education, and community development from Katsina State and beyond.";
+  "An independent digital news magazine serving communities across North West Nigeria with trusted reporting on news, politics, education, and community development.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -52,11 +52,14 @@ export const metadata: Metadata = {
   },
   description: SITE_DESCRIPTION,
   keywords: [
+    "North West Nigeria news",
+    "Northwestern Nigeria journalism",
     "Katsina news",
     "Nigerian politics",
     "community development",
     "education",
-    "Pen Times",
+    "Muryar Jama'a",
+    "Pen Times Magazine",
   ],
   authors: [{ name: "Pen Times Editorial Team" }],
   creator: SITE_NAME,
@@ -90,8 +93,8 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     site: "@pentimes",
     creator: "@pentimes",
-    title: SITE_NAME,
-    description: "Katsina's trusted digital magazine.",
+    title: `${SITE_NAME} — Muryar Jama'a`,
+    description: "Independent journalism serving communities across North West Nigeria, rooted in Katsina State.",
     images: [DEFAULT_OG_IMAGE.url],
   },
   robots: {
