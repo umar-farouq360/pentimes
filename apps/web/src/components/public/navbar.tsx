@@ -63,11 +63,11 @@ export function Navbar() {
           </span>
           <div className="ticker-wrap flex-1">
             <p className="ticker-content text-caption">
-              Welcome to Pen Times Magazine — Muryar Jama'a — an independent digital news magazine serving communities
+              Welcome to Pen Times Magazine — Muryar Jama'a, an independent digital news magazine serving communities
               across North West Nigeria
               &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp; Stay informed, stay
               connected, stay empowered &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
-              Welcome to Pen Times Magazine — Muryar Jama'a — an independent digital news magazine serving communities
+              Welcome to Pen Times Magazine — Muryar Jama'a, an independent digital news magazine serving communities
               across North West Nigeria
               &nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp; Stay informed, stay
               connected, stay empowered
