@@ -18,7 +18,7 @@ import type {
 
 export const metadata: Metadata = {
   description:
-    "Your trusted source for news, politics, education, and community development from Katsina State and beyond.",
+    "Pen Times Magazine is an independent digital news magazine serving communities across North West Nigeria, with reporting rooted in Katsina State.",
   alternates: {
     canonical: process.env["NEXT_PUBLIC_SITE_URL"] ?? "https://pentimes.ng",
   },
@@ -221,9 +221,10 @@ export default async function HomePage() {
               <em className="text-amber-400 not-italic">Your Story</em>
             </h2>
             <p className="text-body text-white/70 mb-6 max-w-prose-narrow">
-              We believe every community deserves access to quality, unbiased
-              journalism. Pen Times Magazine brings you the stories that matter
-              — from the corridors of power to the grassroots of Katsina State.
+              Pen Times Magazine is an independent digital news magazine serving
+              communities across North West Nigeria. With our roots in Katsina
+              State, we bring readers credible, community-centred reporting on
+              the issues that shape their lives.
             </p>
             <div className="flex flex-wrap gap-3">
               <Link

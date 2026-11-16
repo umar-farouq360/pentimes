@@ -18,18 +18,18 @@ const DEFAULT_ITEMS: TickerItem[] = [
   {
     id: "1",
     label:
-      "Welcome to Pen Times Magazine — Katsina's most trusted source for news and analysis",
+      "Welcome to Pen Times Magazine — Muryar Jama'a, serving communities across North West Nigeria with independent journalism",
     href: "/",
   },
   {
     id: "2",
     label:
-      "Stay informed on Nigerian politics, education, and community development",
+      "Independent reporting on news, politics, education, and community life across North West Nigeria",
     href: "/articles",
   },
   {
     id: "3",
-    label: "Read the latest stories from across Katsina State and beyond",
+    label: "Rooted in Katsina State, sharing the stories that matter to communities across North West Nigeria",
     href: "/articles",
   },
   {

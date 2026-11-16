@@ -35,7 +35,7 @@ export default function AdvertisePage() {
           Advertise with Pen Times
         </h1>
         <p className="text-body-lg text-muted-foreground leading-relaxed max-w-prose">
-          Put your organisation in front of readers interested in news, education, politics, and community life in Katsina and beyond. Tell us what you’re promoting and we’ll discuss options that fit your goals.
+          Put your organisation in front of readers interested in news, education, politics, and community life across North West Nigeria, including communities in Katsina State. Tell us what you’re promoting and we’ll discuss options that fit your goals.
         </p>
       </header>
 
