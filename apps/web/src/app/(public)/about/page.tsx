@@ -61,7 +61,7 @@ const sections = [
   {
     label: "Politics",
     href: "/articles?category=politics",
-    description: "Nigerian and Katsina politics",
+    description: "Politics and public affairs across North West Nigeria, including Katsina State",
   },
   {
     label: "Education",
