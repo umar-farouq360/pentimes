@@ -18,7 +18,7 @@ const DEFAULT_ITEMS: TickerItem[] = [
   {
     id: "1",
     label:
-      "Welcome to Pen Times Magazine — Muryar Jama'a, independent journalism serving North West Nigeria",
+      "Welcome to Pen Times Magazine — Muryar Jama'a, independent journalism serving communities across North West Nigeria",
     href: "/",
   },
   {

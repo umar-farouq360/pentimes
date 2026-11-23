@@ -16,7 +16,7 @@ import { DEFAULT_OG_IMAGE } from "@/lib/seo";
 export const metadata: Metadata = {
   title: "About Us",
   description:
-    "Learn about Pen Times Magazine, Muryar Jama'a — an independent digital news magazine serving communities across North West Nigeria since 2024.",
+    "Learn about Pen Times Magazine, Muryar Jama'a — an independent digital news magazine serving communities across North West Nigeria, with roots in Katsina State since 2024.",
   openGraph: {
     title: "About Pen Times Magazine",
     description:
@@ -93,7 +93,7 @@ export default function AboutPage() {
           <em className="not-italic text-amber-600">Your Story</em>
         </h1>
         <p className="text-body-lg text-muted-foreground leading-relaxed mb-4">
-          Pen Times Magazine was founded in Katsina State with a simple belief:
+          Pen Times Magazine was founded in Katsina State in 2024 with a simple belief:
           communities deserve quality, independent journalism that reflects
           their lives, celebrates their voices, and holds power accountable.
           Today, Muryar Jama'a serves readers and communities across North West
@@ -101,8 +101,9 @@ export default function AboutPage() {
         </p>
         <p className="text-body text-muted-foreground leading-relaxed">
           From the corridors of government to the classrooms of Dutsinma, from
-          community meetings in Daura to university campuses in Katsina city —
-          we cover the stories that matter to you.
+          community meetings in Daura to university campuses in Katsina city,
+          we report on the stories shaping life in Katsina State and the wider
+          region.
         </p>
       </div>
 

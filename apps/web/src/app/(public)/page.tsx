@@ -18,7 +18,7 @@ import type {
 
 export const metadata: Metadata = {
   description:
-    "An independent digital news magazine serving communities across North West Nigeria with trusted reporting on news, politics, education, and community development.",
+    "An independent digital news magazine serving communities across North West Nigeria with trusted reporting rooted in Katsina State.",
   alternates: {
     canonical: process.env["NEXT_PUBLIC_SITE_URL"] ?? "https://pentimes.ng",
   },
