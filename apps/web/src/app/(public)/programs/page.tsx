@@ -9,6 +9,10 @@ import type { ScheduledProgramType } from "@/types";
 
 const SITE_URL = process.env["NEXT_PUBLIC_SITE_URL"] ?? "https://pentimes.ng";
 
+// Program data comes from the API, which is unavailable during static builds.
+// Render this page on request so builds do not depend on API DNS or uptime.
+export const dynamic = "force-dynamic";
+
 interface ProgramsResult {
   scheduledPrograms: ScheduledProgramType[];
 }
