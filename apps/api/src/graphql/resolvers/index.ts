@@ -5,3 +5,4 @@ import './comment.resolver.js';
 import './like.resolver.js';
 import './bookmark.resolver.js';
 import './scheduled-program.resolver.js';
+import './site-stats.resolver.js';

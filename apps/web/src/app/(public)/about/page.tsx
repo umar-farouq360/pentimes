@@ -12,6 +12,16 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { DEFAULT_OG_IMAGE } from "@/lib/seo";
+import { publicClient } from "@/lib/graphql/client";
+import { GET_SITE_STATS } from "@/lib/graphql/queries/site-stats";
+
+interface SiteStatsResult {
+  siteStats: {
+    publishedStories: number;
+    totalViews: number;
+    categoryCount: number;
+  };
+}
 
 export const metadata: Metadata = {
   title: "About Us",
@@ -24,6 +34,8 @@ export const metadata: Metadata = {
     images: [DEFAULT_OG_IMAGE],
   },
 };
+
+export const dynamic = "force-dynamic";
 
 const values = [
   {
@@ -80,7 +92,19 @@ const sections = [
   },
 ];
 
-export default function AboutPage() {
+async function loadSiteStats(): Promise<SiteStatsResult["siteStats"] | null> {
+  try {
+    const data = await publicClient.request<SiteStatsResult>(GET_SITE_STATS);
+    return data.siteStats;
+  } catch (error) {
+    console.error("Failed to load About page statistics", error);
+    return null;
+  }
+}
+
+export default async function AboutPage() {
+  const siteStats = await loadSiteStats();
+
   return (
     <div className="max-w-container mx-auto px-4 sm:px-6 py-12">
       {/* Hero */}
@@ -128,9 +152,18 @@ export default function AboutPage() {
           <div className="flex items-center justify-center md:justify-end">
             <div className="grid grid-cols-2 gap-4 text-center">
               {[
-                { label: "Stories Published", value: "500+" },
-                { label: "Monthly Readers", value: "10K+" },
-                { label: "Categories", value: "8" },
+                {
+                  label: "Stories Published",
+                  value: siteStats?.publishedStories.toLocaleString() ?? "—",
+                },
+                {
+                  label: "Monthly Readers",
+                  value: siteStats?.totalViews.toLocaleString() ?? "—",
+                },
+                {
+                  label: "Categories",
+                  value: siteStats?.categoryCount.toLocaleString() ?? "—",
+                },
                 { label: "Year Founded", value: "2024" },
               ].map((stat) => (
                 <div key={stat.label} className="bg-white/10 rounded-lg p-4">
