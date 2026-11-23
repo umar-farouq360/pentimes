@@ -18,18 +18,18 @@ const DEFAULT_ITEMS: TickerItem[] = [
   {
     id: "1",
     label:
-      "Welcome to Pen Times Magazine — Muryar Jama'a, serving communities across North West Nigeria with independent journalism",
+      "Welcome to Pen Times Magazine — Muryar Jama'a, independent journalism serving communities across North West Nigeria",
     href: "/",
   },
   {
     id: "2",
     label:
-      "Independent reporting on news, politics, education, and community life across North West Nigeria",
+      "Stay informed on news, public affairs, education, and community life across North West Nigeria",
     href: "/articles",
   },
   {
     id: "3",
-    label: "Rooted in Katsina State, sharing the stories that matter to communities across North West Nigeria",
+    label: "Read the latest stories from Katsina State and communities across North West Nigeria",
     href: "/articles",
   },
   {
