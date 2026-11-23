@@ -2,6 +2,7 @@ import { getServerClient } from "@/lib/graphql/client";
 import { GET_ARTICLES } from "@/lib/graphql/queries/articles";
 import { GET_USERS } from "@/lib/graphql/queries/users";
 import { GET_ALL_COMMENTS } from "@/lib/graphql/queries/comments";
+import { GET_SITE_STATS } from "@/lib/graphql/queries/site-stats";
 import { StatCard } from "@/components/ui/stat-card";
 import { SectionHeader } from "@/components/public/section-header";
 import { ArticleCard } from "@/components/ui/article-card";
@@ -26,6 +27,9 @@ interface UsersResult {
 interface CommentsResult {
   allComments: { total: number };
 }
+interface SiteStatsResult {
+  siteStats: { publishedStories: number; totalViews: number };
+}
 
 export default async function AdminPage() {
   let totalArticles = 0,
@@ -38,13 +42,18 @@ export default async function AdminPage() {
 
   try {
     const client = await getServerClient();
-    const [articlesData, usersData, commentsData] = await Promise.allSettled([
-      client.request<ArticlesResult>(GET_ARTICLES, {
-        filters: { limit: 100, offset: 0 },
-      }),
-      client.request<UsersResult>(GET_USERS),
-      client.request<CommentsResult>(GET_ALL_COMMENTS, { limit: 1, offset: 0 }),
-    ]);
+    const [articlesData, usersData, commentsData, siteStatsData] =
+      await Promise.allSettled([
+        client.request<ArticlesResult>(GET_ARTICLES, {
+          filters: { limit: 100, offset: 0 },
+        }),
+        client.request<UsersResult>(GET_USERS),
+        client.request<CommentsResult>(GET_ALL_COMMENTS, {
+          limit: 1,
+          offset: 0,
+        }),
+        client.request<SiteStatsResult>(GET_SITE_STATS),
+      ]);
 
     if (articlesData.status === "fulfilled") {
       totalArticles = articlesData.value.articles.total;
@@ -53,6 +62,10 @@ export default async function AdminPage() {
       draftArticles = items.filter((a) => a.status === "draft").length;
       totalViews = items.reduce((s, a) => s + a.views, 0);
       recentArticles = items.slice(0, 6);
+    }
+    if (siteStatsData.status === "fulfilled") {
+      publishedArticles = siteStatsData.value.siteStats.publishedStories;
+      totalViews = siteStatsData.value.siteStats.totalViews;
     }
     if (usersData.status === "fulfilled") {
       totalUsers = usersData.value.users.length;
