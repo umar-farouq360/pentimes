@@ -18,7 +18,7 @@ import { cacheService, CacheKeys }  from '../../services/redis.service.js';
 import { slugify }                  from '../../helpers/slugify.js';
 import { calculateReadingTime }     from '../../helpers/reading-time.js';
 import { logger }                   from '../../helpers/logger.js';
-import { CACHE_TTL }                from '@pentimes/shared';
+import { CACHE_TTL, NORTH_WEST_STATES } from '@pentimes/shared';
 import {
   CreateArticleInput,
   UpdateArticleInput,
@@ -74,6 +74,16 @@ function normalizeArticle(raw: ArticleWithRelations): ArticleFull {
     likeCount: raw.likeCount ?? 0,
     commentCount: raw.commentCount ?? 0,
   } as ArticleFull;
+}
+
+function assertCoverageState(
+  value: string | null | undefined,
+): string | null | undefined {
+  if (value == null) return value;
+  if (!(NORTH_WEST_STATES as readonly string[]).includes(value)) {
+    throw new GraphQLError('Coverage state must be a North West Nigeria state.');
+  }
+  return value;
 }
 
 function assertArticleStatus(
@@ -314,6 +324,7 @@ builder.mutationField('createArticle', (t) =>
           title:       input.title,
           slug,
           excerpt:     input.excerpt ?? null,
+          coverageState: assertCoverageState(input.coverageState) ?? null,
           content:     input.content,
           coverImage:  input.coverImage ?? null,
           status,
@@ -373,6 +384,9 @@ builder.mutationField('updateArticle', (t) =>
         }
         if (input.slug)    updates.slug    = input.slug;
         if (input.excerpt !== undefined) updates.excerpt = input.excerpt ?? null;
+        if (input.coverageState !== undefined) {
+          updates.coverageState = assertCoverageState(input.coverageState) ?? null;
+        }
         if (input.content) {
           updates.content     = input.content;
           updates.readingTime = calculateReadingTime(input.content);

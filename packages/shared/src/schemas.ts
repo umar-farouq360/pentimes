@@ -16,6 +16,7 @@ import {
   ARTICLE_STATUS_VALUES,
   PROGRAM_STATUS_VALUES,
   CONTENT_LIMITS,
+  NORTH_WEST_STATES,
 } from './constants.js';
 
 // ── Auth ──────────────────────────────────────────────────────────
@@ -129,6 +130,7 @@ export const CreateArticleSchema = z.object({
       `Excerpt must be at most ${CONTENT_LIMITS.EXCERPT_MAX} characters`
     )
     .trim(),
+  coverageState: z.enum(NORTH_WEST_STATES).nullable().optional(),
   content: z.string().min(50, 'Content must be at least 50 characters'),
   coverImage: z.string().url('Invalid cover image URL').optional().nullable(),
   status: z.enum(ARTICLE_STATUS_VALUES).default('draft'),

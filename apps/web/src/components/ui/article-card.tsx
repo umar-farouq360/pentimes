@@ -49,6 +49,11 @@ export function ArticleCard({
               className="mb-1 text-[0.6rem]"
             />
           )}
+          {article.coverageState && (
+            <p className="text-[0.6rem] text-muted-foreground mb-1">
+              {article.coverageState} · North West Nigeria
+            </p>
+          )}
           <Link href={`/articles/${article.slug}`}>
             <h3 className="font-serif text-body-sm font-semibold leading-snug line-clamp-2 hover:text-amber-700 transition-colors">
               {article.title}
@@ -94,6 +99,11 @@ export function ArticleCard({
                   className="text-[0.6rem]"
                 />
               ))}
+              {article.coverageState && (
+                <span className="text-[0.6rem] text-muted-foreground font-medium">
+                  {article.coverageState} · North West Nigeria
+                </span>
+              )}
               {showStatus && <ArticleStatusBadge status={article.status} />}
             </div>
             <Link href={`/articles/${article.slug}`}>
@@ -154,6 +164,11 @@ export function ArticleCard({
                 className="bg-amber-500 text-ink-900"
               />
             ))}
+            {article.coverageState && (
+              <span className="text-caption text-white font-medium">
+                {article.coverageState} · North West Nigeria
+              </span>
+            )}
           </div>
           <Link href={`/articles/${article.slug}`}>
             <h2 className="font-serif text-headline-lg sm:text-headline-xl font-bold text-white leading-tight line-clamp-3 group-hover:text-amber-200 transition-colors mb-3">
@@ -203,6 +218,11 @@ export function ArticleCard({
               className="text-[0.6rem]"
             />
           ))}
+          {article.coverageState && (
+            <span className="text-[0.6rem] text-muted-foreground font-medium">
+              {article.coverageState} · North West Nigeria
+            </span>
+          )}
           {showStatus && <ArticleStatusBadge status={article.status} />}
         </div>
         <Link href={`/articles/${article.slug}`}>

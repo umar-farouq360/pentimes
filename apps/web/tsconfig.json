@@ -22,6 +22,9 @@
       ],
       "@pentimes/shared": [
         "../../packages/shared/src/index.ts"
+      ],
+      "@pentimes/shared/*": [
+        "../../packages/shared/src/*"
       ]
     },
     "noUncheckedIndexedAccess": false,

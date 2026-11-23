@@ -31,6 +31,7 @@ export interface Article {
   title: string;
   slug: string;
   excerpt: string;
+  coverageState: string | null;
   content: string;
   coverImage: string | null;
   status: ArticleStatus;
@@ -49,6 +50,7 @@ export type ArticleCard = Pick<
   | 'title'
   | 'slug'
   | 'excerpt'
+  | 'coverageState'
   | 'coverImage'
   | 'status'
   | 'author'

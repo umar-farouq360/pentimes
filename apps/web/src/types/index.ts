@@ -27,6 +27,7 @@ export interface ArticleCardType {
   title: string;
   slug: string;
   excerpt: string | null;
+  coverageState: string | null;
   coverImage: string | null;
   status: 'draft' | 'published';
   views: number;
